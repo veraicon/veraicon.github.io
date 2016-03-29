@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>小特别的java正则 | veraicon的初心还在这里</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="重读《thinking in java》，读到：普通正则表达式，用\来匹配反斜杠，但是java内要写\\
+普通正则表达式，用\b来匹配数字，但是java内要写\b
+但是比如\n\t类似的，在java内保持一致；
+总结下：
+猜测本质上是因为java编译时，字符串先预处理，\n本身就是存储一个字符，要存储一个\,在java表达式里面要写\，所以每2个\都会被存储为一个\，因此这样就得到了标准的正则表达">
+<meta property="og:type" content="article">
+<meta property="og:title" content="小特别的java正则">
+<meta property="og:url" content="http://veraicon.github.io/2016/03/30/小特别的java正则/index.html">
+<meta property="og:site_name" content="veraicon的初心还在这里">
+<meta property="og:description" content="重读《thinking in java》，读到：普通正则表达式，用\来匹配反斜杠，但是java内要写\\
+普通正则表达式，用\b来匹配数字，但是java内要写\b
+但是比如\n\t类似的，在java内保持一致；
+总结下：
+猜测本质上是因为java编译时，字符串先预处理，\n本身就是存储一个字符，要存储一个\,在java表达式里面要写\，所以每2个\都会被存储为一个\，因此这样就得到了标准的正则表达">
+<meta property="og:updated_time" content="2016-03-29T23:43:30.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="小特别的java正则">
+<meta name="twitter:description" content="重读《thinking in java》，读到：普通正则表达式，用\来匹配反斜杠，但是java内要写\\
+普通正则表达式，用\b来匹配数字，但是java内要写\b
+但是比如\n\t类似的，在java内保持一致；
+总结下：
+猜测本质上是因为java编译时，字符串先预处理，\n本身就是存储一个字符，要存储一个\,在java表达式里面要写\，所以每2个\都会被存储为一个\，因此这样就得到了标准的正则表达">
+  
+    <link rel="alternate" href="/atom.xml" title="veraicon的初心还在这里" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">veraicon的初心还在这里</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://veraicon.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-小特别的java正则" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/03/30/小特别的java正则/" class="article-date">
+  <time datetime="2016-03-29T23:39:30.000Z" itemprop="datePublished">2016-03-30</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      小特别的java正则
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>重读《thinking in java》，读到：<br>普通正则表达式，用\来匹配反斜杠，但是java内要写\\</p>
+<p>普通正则表达式，用\b来匹配数字，但是java内要写\b</p>
+<p>但是比如\n\t类似的，在java内保持一致；</p>
+<p>总结下：</p>
+<p>猜测本质上是因为java编译时，字符串先预处理，\n本身就是存储一个字符，要存储一个\,在java表达式里面要写\，所以每2个\都会被存储为一个\，因此这样就得到了标准的正则表达式，再按照标准正则处理。</p>
+<p>所以总结下来，就是如果是非正则相关的，基础转义的\n\t等等，保持原状；但是正则本身的表征符，内部\都要翻倍，即乘以2的个数即可。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://veraicon.github.io/2016/03/30/小特别的java正则/" data-id="cime2knhw0000lr54ql8pzne0" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java-正则/">java 正则</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/03/28/试用hexo/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">试用hexo</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/java-正则/">java 正则</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/java-正则/" style="font-size: 10px;">java 正则</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/03/30/小特别的java正则/">小特别的java正则</a>
+          </li>
+        
+          <li>
+            <a href="/2016/03/28/试用hexo/">试用hexo</a>
+          </li>
+        
+          <li>
+            <a href="/2016/03/28/hello-world/">Hello World</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 veraicon<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
